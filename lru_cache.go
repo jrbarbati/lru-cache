@@ -10,7 +10,7 @@ type LRUCache[T any] struct {
 	capacity int
 	mux      sync.Mutex
 	cache    map[string]*linked_list.Node[T]
-	usage    linked_list.DoublyLinkedList[T]
+	usage    *linked_list.DoublyLinkedList[T]
 	keyFunc  func(T) string
 }
 

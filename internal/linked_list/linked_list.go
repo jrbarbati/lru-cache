@@ -19,14 +19,14 @@ func NewNode[T any](key string, value T) *Node[T] {
 	}
 }
 
-func New[T any]() DoublyLinkedList[T] {
+func New[T any]() *DoublyLinkedList[T] {
 	head := &Node[T]{}
 	tail := &Node[T]{}
 
 	head.next = tail
 	tail.prev = head
 
-	return DoublyLinkedList[T]{
+	return &DoublyLinkedList[T]{
 		head: head,
 		tail: tail,
 	}
@@ -53,6 +53,10 @@ func (l *DoublyLinkedList[T]) Back() *Node[T] {
 }
 
 func (l *DoublyLinkedList[T]) Remove(node *Node[T]) {
+	if l.head.next == l.tail {
+		return
+	}
+
 	node.prev.next = node.next
 	node.next.prev = node.prev
 }
